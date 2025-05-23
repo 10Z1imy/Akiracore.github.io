@@ -278,29 +278,12 @@ function resumeAllLyrics() {
     });
 }
 
+// 音乐文件列表
+const songs = ['falling.mp3', 'replay.mp3'];
 
-
-// 直接指定音乐文件列表（与服务器路径匹配）
-const songs = ['falling.mp3', 'replay.mp3']; // 需与 music 文件夹中的实际文件名一致
-
-// 随机选择初始歌曲
-if (songs.length > 0) {
-    currentSongIndex = Math.floor(Math.random() * songs.length);
-    audio.src = `../assets/music/${songs[currentSongIndex]}`; // 修改为相对路径
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
+// 随机选择一首歌作为初始歌曲
+currentSongIndex = Math.floor(Math.random() * songs.length);
+audio.src = `assets/music/${songs[currentSongIndex]}`;
 
 // 播放/暂停控制
 playBtn.addEventListener('click', function() {
@@ -320,37 +303,22 @@ playBtn.addEventListener('click', function() {
     }
 });
 
-// 切歌控制
-nextBtn.addEventListener('click', function() {
-    if (songs.length > 0) {
-        currentSongIndex = Math.floor(Math.random() * songs.length);
-        audio.src = `../assets/music/${songs[currentSongIndex]}`; // 修改为相对路径
+// 下一首按钮点击事件
+nextBtn.addEventListener('click', () => {
+    currentSongIndex = (currentSongIndex + 1) % songs.length;
+    audio.src = `assets/music/${songs[currentSongIndex]}`;
+    if (isPlaying) {
         audio.play();
-        isPlaying = true;
-        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        currentLyricIndex = 0;
-        if (lyricsInterval) {
-            clearInterval(lyricsInterval);
-        }
-        lyricsInterval = setInterval(checkLyrics, 100);
-        resumeAllLyrics();
     }
+    updateLyrics();
 });
 
-// 歌曲结束时自动播放下一首
-audio.addEventListener('ended', function() {
-    if (songs.length > 0) {
-        currentSongIndex = Math.floor(Math.random() * songs.length);
-        audio.src = `../assets/music/${songs[currentSongIndex]}`; // 修改为相对路径
-        audio.play();
-        isPlaying = true;
-        currentLyricIndex = 0;
-        if (lyricsInterval) {
-            clearInterval(lyricsInterval);
-        }
-        lyricsInterval = setInterval(checkLyrics, 100);
-        resumeAllLyrics();
-    }
+// 音频播放结束时自动播放下一首
+audio.addEventListener('ended', () => {
+    currentSongIndex = (currentSongIndex + 1) % songs.length;
+    audio.src = `assets/music/${songs[currentSongIndex]}`;
+    audio.play();
+    updateLyrics();
 });
 
 // 控制面板显示/隐藏功能
