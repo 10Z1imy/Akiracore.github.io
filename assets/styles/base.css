@@ -1,0 +1,130 @@
+/* 这里是全局样式 
+
+1. 侧边导航栏
+2. 背景底色
+
+
+
+
+
+
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #002FA7;  /* 克莱因蓝 */
+    min-height: 100vh;
+}
+
+
+/* 侧边导航栏样式 */
+.side-nav {
+    position: fixed;
+    left: -200px;
+    top: 0px;
+    height: 100vh;
+    width: 240px;
+    background: #ffffffe7;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 20px #3f2ea062;
+    z-index: 1000;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border-right: 1px solid rgba(255, 255, 255, 0.795);
+    overflow: hidden;
+}
+
+.side-nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.785) 45%,
+        #ffffffba 50%,
+        rgba(255, 255, 255, 0.781) 55%,
+        transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: shine 8s infinite;
+}
+
+
+.side-nav:hover {
+    left: 0;
+    background: hsla(187, 100%, 98%, 0.658);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.side-nav-content {
+    top: 25px;
+    padding: 3rem 0;
+    position: relative;
+}
+
+.side-nav-content a {
+    display: block;
+    padding: 1rem 2rem;
+    color: #67fcff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.side-nav-content a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+}
+
+.side-nav-content a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(10px);
+    color: hsl(252, 100%, 95%);
+}
+
+.side-nav-content a:hover::before {
+    transform: translateX(100%);
+}
+
+.side-nav-content i {
+    margin-right: 12px;
+    width: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.side-nav-content a:hover i {
+    transform: scale(1.2) rotate(5deg);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.section-content {
+    height: 100%;
+    margin: 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
