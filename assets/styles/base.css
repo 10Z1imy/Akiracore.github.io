@@ -19,7 +19,7 @@ body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     color: #333;
-    background: #002FA7;  /* 克莱因蓝 */
+    background: linear-gradient(to right, hsl(234, 100%, 38%), #370e54);  /* 克莱因蓝 */
     min-height: 100vh;
 }
 
